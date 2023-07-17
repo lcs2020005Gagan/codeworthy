@@ -17,6 +17,10 @@ password:{
 profileImg:{
     type:String
 },
+notes:{
+    type:Object,
+    default:{}
+},
 solvedQuestions:[{type: mongoose.Schema.Types.ObjectId,
     ref: 'questions'}],
 savedQuestions:[{type: mongoose.Schema.Types.ObjectId,

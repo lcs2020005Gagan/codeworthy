@@ -88,5 +88,26 @@ router.post('/unmarkquestion/:question_id', fetchuser, [
     }
 })
 
+//update notes
+router.post('/updatenotes', fetchuser, [body('notes','enter valid note'),
+], async (req, res) => {
+    try {
+        const notes = req.body.notes;
+       await User.findOneAndUpdate({
+          _id:req.id
+        },{
+          $set:{
+            notes:notes
+          }
+        })
+       const user=await User.find({_id:req.id});
+        res.json({"message":"notes updated successfully","user":user});
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+})
+
+
 
 module.exports=router

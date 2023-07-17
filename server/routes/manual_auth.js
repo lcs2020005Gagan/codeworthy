@@ -9,7 +9,7 @@ const { body, validationResult } = require('express-validator');
 var bcrypt = require('bcryptjs');
 const secretKey = "helloworld"
 var jwt = require("jsonwebtoken");
-
+let success=false
 
 //create user
 router.post('/createuser',
@@ -116,10 +116,9 @@ router.post('/loginuser',
            {
             return res.status(400).json({success, errors: "wrong passwrod" });
            }
-
         var authtoken=await jwt.sign({id:user.id},secretKey)
         success=true;
-        res.json({success,authtoken,user});
+        res.json({"success":"logged in successfully","authtoken":authtoken,"user":user});
         success=false;  
     }
     }
